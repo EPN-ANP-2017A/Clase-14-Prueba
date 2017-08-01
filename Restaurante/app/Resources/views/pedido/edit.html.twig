@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pedido edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    {{ detalles.count }}
+    {% if detalles.count > 0 %}
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Plato</th>
+                <th>Cantidad</th>
+                <th>Valor Unitario</th>
+                <th>Valor Total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for detalle in detalles %}
+                <tr>
+                    <td>{{ detalle.plato.nombre }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>{{ detalle.plato.precio }}</td>
+                    <td>{{ detalle.cantidad * detalle.plato.precio }}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+
+    <ul>
+        <li>
+            <a href="{{ path('pedido_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
